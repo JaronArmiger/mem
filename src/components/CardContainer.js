@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Card from './Card';
+import Scoreboard from './Scoreboard';
 import uniqid from 'uniqid';
 
 function shuffle(a) {
@@ -14,48 +15,60 @@ function shuffle(a) {
 }
 
 const CardContainer = () => {
-  let signs = {'Aquarius': false, 'Pisces': false, 
-  			   'Aries': false, 'Taurus': false, 
-  			   'Gemini': false, 'Cancer': false,
-               'Leo': false, 'Virgo': false, 
-               'Libra': false, 'Scorpio': false, 
-               'Sagittarius': false, 'Capricorn': false};
+  let signsInit = ['Aquarius', 'Pisces', 
+  			   'Aries', 'Taurus', 
+  			   'Gemini', 'Cancer',
+               'Leo', 'Virgo', 
+               'Libra', 'Scorpio', 
+               'Sagittarius', 'Capricorn'];
 
-  const [count, setCount] = useState(0);
-
-  const incrementCount = () => {
-  	setCount(count + 1);
-  	console.log(count);
-  }
+  const [signs, setSigns] = useState(signsInit);
+  const [clickedArr, setClickedArr] = useState([]);
+  const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
 
   const handleClick = (signName, clicked) => {
-    //console.log(`${signName}, ${clicked}`);
-    setCount(count + 1);
-  	console.log(count);
+    console.log(`${signName}, ${clicked}`);
     reshuffle();
+    addOrReset(signName);
   }
-  
-  const cardsInit = Object.entries(signs).map(([k, v]) => {
-  	return <Card key={uniqid()} 
-              sign={k} 
-              clicked={v}
-              handleClick={handleClick}/>
-  });
-
-  const [cards, setCards] = useState(cardsInit);
 
   const reshuffle = () => {
-    const shuffled = shuffle(cards);
-  	setCards([...shuffled]);
+    const shuffled = shuffle(signs);
+  	setSigns([...shuffled]);
+  }
+
+  const isHighestScore = (currScore) => {
+  	if (currScore > highScore) {
+  	  setHighScore(currScore);
+  	}
+  }
+
+  const addOrReset = (signName) => {
+    if (clickedArr.includes(signName)) {
+      console.log('damn u ain\'t got no bitches');
+      isHighestScore(score);
+      setScore(0);
+    } else {
+      setClickedArr(clickedArr.concat(signName));
+      setScore(score + 1);
+    }
   }
 
 
   return (
   	<div>
   	  <h1>CardContainer</h1>
+  	   <Scoreboard score={score} highScore={highScore}/>
   	  <div className="cardContainer"
   	   >
-      {cards}
+
+      { signs.map((sign) => {
+      	return <Card key={uniqid()} 
+              sign={sign} 
+              clicked={false}
+              handleClick={handleClick}/>
+      }) }
   	  </div>
   	</div>
   );
