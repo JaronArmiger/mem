@@ -20,25 +20,18 @@ const CardContainer = () => {
                'Leo': false, 'Virgo': false, 
                'Libra': false, 'Scorpio': false, 
                'Sagittarius': false, 'Capricorn': false};
-  /*
-  let signs = [{sign: 'Aquarius', clicked: false}, {sign: 'Pisces', clicked: false}, 
-  			   {sign: 'Aries', clicked: false}, {sign: 'Taurus', clicked: false}, 
-  			   {sign: 'Gemini', clicked: false}, {sign: 'Cancer', clicked: false},
-               {sign: 'Leo', clicked: false}, {sign: 'Virgo', clicked: false}, 
-               {sign: 'Libra', clicked: false}, {sign: 'Scorpio', clicked: false}, 
-               {sign: 'Sagittarius', clicked: false}, {sign: 'Capricorn', clicked: false}];
-  */
-  
-  /*
-  useEffect(() => {
-  	const shuffled = shuffle(signsArr);
-  	setSignsArr([...shuffled]);
-  }, [signsArr])
-  */
 
+  const [count, setCount] = useState(0);
+
+  const incrementCount = () => {
+  	setCount(count + 1);
+  	console.log(count);
+  }
 
   const handleClick = (signName, clicked) => {
-    console.log(`${signName}, ${clicked}`);
+    //console.log(`${signName}, ${clicked}`);
+    setCount(count + 1);
+  	console.log(count);
     reshuffle();
   }
   
