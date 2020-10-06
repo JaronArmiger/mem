@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Ceviche+One&display=swap');
+
+$main-font: 'Ceviche One', cursive;
+
+html, body {
+  font-family: $main-font;
+}
+
+
+h1 {
+  color: #0cc99d;
+  text-align: center;
+}
+
+p {
+  font-size: 25px;
+}
+
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: #9572db;
+  margin: 4px;
+  flex-basis: 25%;
+  cursor: pointer;
+  color: #0cc99d;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.clicked {
+  background-color: #fcba03;
+}
